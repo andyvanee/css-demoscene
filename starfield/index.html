@@ -54,8 +54,15 @@
                     --starfieldProgress: 0;
                     background-image: paint(starfield-paint);
                 }
+
+                .wrapper {
+                    max-width: 54rem;
+                    margin: 0 auto;
+                }
             </style>
-            <slot></slot>
+            <div class="wrapper">
+                <slot></slot>
+            </div>
         </template>
         <template id="template-lorem-ipsum">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor est et ultrices iaculis. Nullam

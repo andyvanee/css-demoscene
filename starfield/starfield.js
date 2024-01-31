@@ -10,9 +10,6 @@ class StarfieldInner extends HTMLElement {
     }
 
     connectedCallback() {
-        /** @type {HTMLElement} */
-        const parent = this.parentElement
-
         /** @type {HTMLTemplateElement} */
         const template = document.querySelector('#template-starfield-inner')
 
@@ -22,13 +19,17 @@ class StarfieldInner extends HTMLElement {
     }
 
     appendLoremIpsum() {
+        /** @type {HTMLDivElement} */
+        const wrapper = this.root.querySelector('.wrapper')
+
         /** @type {HTMLTemplateElement} */
         const lorem = document.querySelector('#template-lorem-ipsum')
 
-        for (const _ of new Array(2)) this.root.append(lorem.content.cloneNode(true))
+        for (const _ of new Array(2)) wrapper.append(lorem.content.cloneNode(true))
     }
 
     configureScrollTimeline() {
+        /** @type {ScrollTimeline} */
         const timeline = new ScrollTimeline({
             source: document.querySelector('main'),
             axis: 'block',
