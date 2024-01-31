@@ -25,6 +25,10 @@
             overflow-y: scroll;
             scroll-timeline: --starfieldTimeline block;
         }
+
+        a {
+            color: #c0c0c0;
+        }
     </style>
 </head>
 
@@ -32,7 +36,34 @@
     <main>
         <starfield-inner>
             <h1>Scroll-timeline + CSS Paint API</h1>
-            <p>Hello world</p>
+            <p>This demo is a test of the interactions between <code>animation-timeline</code>,
+                <code>scroll-timeline</code>, and the CSS Paint API.
+            </p>
+            <p>I discovered that CSS custom properties are not smoothly animated, even if the type is well defined using
+                the <code>@property</code> syntax. Due to this limitation, I've pre-defined the values of the animation
+            </p>
+            <p>
+                (see
+                <code><a href="https://github.com/search?q=repo%3Aandyvanee/css-demoscene%20starfieldProgressValues&type=code">starfieldProgressValues</a></code>).
+            </p>
+            <h2>References</h2>
+            <ul>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline">animation-timeline</a>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline">scroll-timeline</a>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@property">@property</a>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/ScrollTimeline">ScrollTimeline</a>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Painting_API">CSS Painting API</a>
+                </li>
+            </ul>
         </starfield-inner>
     </main>
     <div id="html-template-contents" style="display: none">
