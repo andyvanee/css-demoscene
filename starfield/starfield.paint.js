@@ -1,3 +1,4 @@
+import {clamp} from '../lib/Number.js'
 import {createNoise2D} from '../lib/simplex-noise/simplex-noise.js'
 
 if (typeof registerPaint !== 'function') throw 'Not a Paint context'
@@ -32,7 +33,7 @@ if (registerPaint) {
             ctx.rect(0, 0, geom.width, geom.height)
             ctx.fill()
 
-            ctx.fillStyle = `rgb(255, 255, 255, ${1 - progress})`
+            ctx.fillStyle = `rgb(255, 255, 255, ${clamp(0.5 - progress, 0, 1)})`
             for (let x = 0; x < 1024; x++) {
                 const sampleX = precomputedNoise[x]
                 const sampleY = precomputedNoise[(x + 512) % 1024]
