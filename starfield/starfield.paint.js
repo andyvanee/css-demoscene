@@ -34,6 +34,7 @@ if (registerPaint) {
             ctx.fill()
 
             ctx.fillStyle = `rgb(255, 255, 255, ${clamp(0.5 - progress, 0, 1)})`
+
             for (let x = 0; x < 1024; x++) {
                 const sampleX = precomputedNoise[x]
                 const sampleY = precomputedNoise[(x + 512) % 1024]
@@ -42,8 +43,6 @@ if (registerPaint) {
                 ctx.ellipse(sampleX * width, sampleY * height, size, size, 0, 0, 2 * Math.PI)
                 ctx.fill()
             }
-
-            // ctx.fill()
         }
     }
 
