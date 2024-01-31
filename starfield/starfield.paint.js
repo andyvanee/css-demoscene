@@ -33,12 +33,15 @@ if (registerPaint) {
             ctx.rect(0, 0, geom.width, geom.height)
             ctx.fill()
 
-            ctx.fillStyle = `rgb(255, 255, 255, ${clamp(0.5 - progress, 0, 1)})`
-
             for (let x = 0; x < 1024; x++) {
                 const sampleX = precomputedNoise[x]
                 const sampleY = precomputedNoise[(x + 512) % 1024]
                 const size = x / 256
+                const redshift = clamp((x / 1024) * 128 + 128, 0, 255)
+                const opacity = clamp(0.5 - progress, 0, 1)
+
+                ctx.fillStyle = `rgb(255, ${redshift}, ${redshift}, ${opacity})`
+
                 ctx.beginPath()
                 ctx.ellipse(sampleX * width, sampleY * height, size, size, 0, 0, 2 * Math.PI)
                 ctx.fill()
