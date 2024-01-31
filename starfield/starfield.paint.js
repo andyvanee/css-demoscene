@@ -11,8 +11,6 @@ const precomputedNoise = [...new Array(1024)].map((_, x) => {
     return noise(col, row)
 })
 
-console.log({precomputedNoise})
-
 if (registerPaint) {
     class StarfieldPaint {
         static get inputProperties() {
@@ -36,9 +34,9 @@ if (registerPaint) {
 
             ctx.fillStyle = `rgb(255, 255, 255, ${1 - progress})`
             for (let x = 0; x < 1024; x++) {
+                const sampleX = precomputedNoise[x]
+                const sampleY = precomputedNoise[(x + 512) % 1024]
                 const size = x / 256
-                const sampleX = noise(x, 0)
-                const sampleY = noise(x, x)
                 ctx.beginPath()
                 ctx.ellipse(sampleX * width, sampleY * height, size, size, 0, 0, 2 * Math.PI)
                 ctx.fill()
