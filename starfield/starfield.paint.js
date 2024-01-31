@@ -1,19 +1,13 @@
-import {clamp} from '../lib/Number.js'
-import {createNoise2D} from '../lib/simplex-noise/simplex-noise.js'
-
 if (typeof registerPaint !== 'function') throw 'Not a Paint context'
 
-const noise = createNoise2D()
-
-const precomputedNoise = [...new Array(1024)].map((_, x) => {
-    const offset = x + 0.01
-    const row = offset % 32
-    const col = offset - row * 32
-    return noise(col, row)
-})
+import {computeStars} from './Star.js'
+import * as Star from './Star.js'
 
 if (registerPaint) {
     class StarfieldPaint {
+        /** @type {Star.Star[] | null} */
+        stars
+
         static get inputProperties() {
             return ['--starfieldProgress']
         }
@@ -25,25 +19,21 @@ if (registerPaint) {
          * @param {StylePropertyMapReadOnly} properties
          */
         paint(ctx, geom, properties) {
-            const progress = parseFloat(properties.get('--starfieldProgress').toString())
             const {width, height} = geom
+            const progress = parseFloat(properties.get('--starfieldProgress').toString())
 
+            if (!this.stars) this.stars = computeStars({count: 1024, width, height})
+
+            ctx.imageSmoothingEnabled = false
             ctx.beginPath()
             ctx.fillStyle = `lab(${progress * 56.05} ${progress * -19.27} ${progress * -43.69} / 1)`
             ctx.rect(0, 0, geom.width, geom.height)
             ctx.fill()
 
-            for (let x = 0; x < 1024; x++) {
-                const sampleX = precomputedNoise[x]
-                const sampleY = precomputedNoise[(x + 512) % 1024]
-                const size = x / 256
-                const redshift = clamp((x / 1024) * 128 + 128, 0, 255)
-                const opacity = clamp(0.5 - progress, 0, 1)
-
-                ctx.fillStyle = `rgb(255, ${redshift}, ${redshift}, ${opacity})`
-
+            for (const star of this.stars) {
+                ctx.fillStyle = star.color(progress)
                 ctx.beginPath()
-                ctx.ellipse(sampleX * width, sampleY * height, size, size, 0, 0, 2 * Math.PI)
+                ctx.ellipse(star.x, star.y, star.size, star.size, 0, 0, 2 * Math.PI)
                 ctx.fill()
             }
         }
