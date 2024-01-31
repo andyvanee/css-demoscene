@@ -1,8 +1,10 @@
 import {clamp} from '../lib/Number.js'
 import {createNoise2D} from '../lib/simplex-noise/simplex-noise.js'
+import {Alea} from '../lib/alea.js'
 
 const noiseSize = 2048
-const noise = createNoise2D()
+const prng = Alea(new Date().getMinutes())
+const noise = createNoise2D(prng)
 
 const precomputedNoise = [...new Array(noiseSize)].map((_, x) => {
     const offset = x + 0.01
