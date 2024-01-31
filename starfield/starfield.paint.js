@@ -34,6 +34,7 @@ class StarfieldPaint {
         ctx.fillRect(0, 0, geom.width, geom.height)
 
         for (const star of this.stars) {
+            if (Math.random() > 0.98) continue
             ctx.beginPath()
             ctx.fillStyle = star.color(progress)
             const halfSize = star.size / 2
