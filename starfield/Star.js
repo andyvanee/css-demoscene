@@ -1,8 +1,10 @@
 import {clamp} from '../lib/Number.js'
 import {createNoise2D} from '../lib/simplex-noise/simplex-noise.js'
 
+const noiseSize = 2048
 const noise = createNoise2D()
-const precomputedNoise = [...new Array(1024)].map((_, x) => {
+
+const precomputedNoise = [...new Array(noiseSize)].map((_, x) => {
     const offset = x + 0.01
     const row = offset % 32
     const col = offset - row * 32
@@ -19,7 +21,6 @@ const precomputedNoise = [...new Array(1024)].map((_, x) => {
 
 /**
  * @typedef StarProps {Object}
- * @property {number} count
  * @property {number} width
  * @property {number} height
  */
@@ -28,12 +29,12 @@ const precomputedNoise = [...new Array(1024)].map((_, x) => {
  * @param {StarProps} props
  * @returns {Star[]}
  */
-export const computeStars = ({count, width, height}) => {
-    return [...new Array(count)].map((_, x) => {
+export const computeStars = ({width, height}) => {
+    return [...new Array(noiseSize)].map((_, x) => {
         const sampleX = precomputedNoise[x]
-        const sampleY = precomputedNoise[(x + 512) % 1024]
-        const size = x / 256
-        const redshift = clamp((x / 1024) * 128 + 128, 0, 255)
+        const sampleY = precomputedNoise[(x + 512) % noiseSize]
+        const size = x / 512
+        const redshift = clamp((x / noiseSize) * 128 + 128, 0, 255)
 
         /**
          * @param {number} progress
