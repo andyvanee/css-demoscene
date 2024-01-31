@@ -19,10 +19,6 @@ class StarfieldInner extends HTMLElement {
         this.root.append(template.content.cloneNode(true))
         this.appendLoremIpsum()
         this.configureScrollTimeline()
-
-        document.querySelector('main').addEventListener('scroll', () => {
-            console.log(this.computedStyleMap().get('--starfieldProgress').toString())
-        })
     }
 
     appendLoremIpsum() {
