@@ -31,14 +31,21 @@
             color: #c0c0c0;
         }
 
+        h1 {
+            background-color: oklch(0.64 0.18 233.5 / 0.2);
+            padding: 0.5rem;
+            border-bottom: 5px solid oklch(0.64 0.18 233.5 / 0.4);
+            margin-bottom: 2rem;
+        }
+
         .lorem {
-            opacity: 0.7;
+            opacity: 0.4;
         }
 
         @property --progress {
             syntax: "<percentage>";
             inherits: false;
-            initial-value: 0;
+            initial-value: 0.0;
         }
 
         @property --border-background-color {
@@ -70,8 +77,19 @@
                     This is a demo of using the CSS Paint API in conjunction with scroll-driven animations.
                 </p>
                 <p>
-                    The extra space and repeated demos are just to give the page enough length to really see the effect
+                    The extra space and repetition below are just to give the page enough length to really see the
+                    effect.
                 </p>
+                <h2>References</h2>
+                <ul>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Painting_API">CSS Painting API</a>
+                    </li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-image">border-image</a></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@property">@property</a></li>
+                    <li><a href="https://houdini.how/">Houdini.how</a></li>
+                    <li><a href="https://web.dev/articles/constructable-stylesheets">Constructable Stylesheets</a></li>
+                </ul>
+                <hr style="margin: 3rem 0" />
             </div>
         </border-image-demo>
     </main>
@@ -162,20 +180,6 @@
                     efficitur mollis euismod. Morbi tristique lacus eu urna bibendum fermentum. Nulla tortor mi,
                     suscipit in ultricies id, consectetur mattis enim. Sed scelerisque enim hendrerit consequat
                     interdum.</p>
-                <p>Sed pretium purus mauris, rutrum fermentum ipsum condimentum a. Suspendisse placerat tellus at metus
-                    porta bibendum. Maecenas sed mauris lacinia, dignissim eros vel, laoreet ligula. Mauris enim velit,
-                    pulvinar et rutrum ac, suscipit in arcu. Vestibulum ante ipsum primis in faucibus orci luctus et
-                    ultrices posuere cubilia curae; Aliquam risus dolor, malesuada sit amet sagittis ac, tincidunt non
-                    diam. Nam et orci sollicitudin, ultrices tortor sed, aliquet mauris. Morbi pellentesque sed enim
-                    eget lacinia. Nulla facilisi. Morbi ornare tortor quis mollis vestibulum. Morbi aliquam quis diam et
-                    pellentesque. Donec cursus tristique leo, ut pretium augue elementum accumsan. Vestibulum et
-                    hendrerit nunc. Etiam ac neque ut urna eleifend tristique sed quis nulla.</p>
-                <p>Mauris et rutrum metus, quis tincidunt sem. Pellentesque habitant morbi tristique senectus et netus
-                    et malesuada fames ac turpis egestas. Vestibulum at ex at diam eleifend accumsan. Sed interdum neque
-                    nec nisi fermentum tempor a vitae risus. Proin malesuada cursus mollis. Vestibulum eu maximus risus.
-                    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque
-                    eleifend orci sed nisi semper, at dignissim lacus aliquam. Nulla consectetur porttitor eros non
-                    consequat.</p>
             </div>
         </template>
     </div>
