@@ -16,3 +16,8 @@ main {
     justify-content: center;
     align-content: center;
 }
+
+a {
+    color: oklch(0.36 0.22 262.61);
+    text-decoration: none;
+}
