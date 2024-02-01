@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starfield</title>
+    <link rel="icon" href="/favicon.svg">
+    <script type="module" src="./border-image.js"></script>
+    <style>
+        :root {
+            font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            background-color: black;
+            color: white;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        main {
+            display: block;
+            position: relative;
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-timeline: --starfieldTimeline block;
+        }
+
+        a {
+            color: #c0c0c0;
+        }
+
+        .lorem {
+            opacity: 0.7;
+        }
+
+        @property --progress {
+            syntax: "<percentage>";
+            inherits: false;
+            initial-value: 0;
+        }
+
+        @property --border-background-color {
+            syntax: "<color>";
+            inherits: true;
+            initial-value: "transparent";
+        }
+
+        @property --border-dash-color {
+            syntax: "<color>";
+            inherits: true;
+            initial-value: "transparent";
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <border-image-demo>
+            <div>
+                <h1>Border Image Demo</h1>
+                <p>This is a demo of a few examples of using the CSS Paint API in conjunction with scroll-driven
+                    animations.</p>
+                <p>The extra space and repeated demos are just to give the page enough length to really see the effect
+                </p>
+            </div>
+        </border-image-demo>
+    </main>
+    <div id="html-template-contents" style="display: none">
+        <template id="template-border-image-demo">
+            <style>
+                .wrapper {
+                    display: block;
+                    padding: 3rem;
+                }
+            </style>
+            <div class="wrapper">
+                <slot></slot>
+            </div>
+        </template>
+
+        <template id="template-border-image-inner">
+            <style>
+                .wrapper {
+                    display: grid;
+                    gap: 1rem;
+                    justify-content: center;
+                    text-align: center;
+                    padding: 1rem;
+                }
+            </style>
+            <div class="wrapper">
+                <p>Hello world</p>
+                <border-image-dashed>Border Image Dashed</border-image-dashed>
+            </div>
+        </template>
+
+        <template id="template-border-image-dashed">
+            <style>
+                :host {
+                    --border-background-color: oklch(0.57 0.15 174.83);
+                    --border-dash-color: oklch(0.86 0.2 98.29);
+                }
+
+                .container {
+                    border-width: 20px;
+                    border-style: solid;
+                    border-image: paint(border-image-dashed-paint) round;
+                    border-image-slice: 10 fill;
+                    border-image-width: 30px 48px;
+                    padding: 4rem;
+                }
+            </style>
+            <div class="container">
+                <slot></slot>
+            </div>
+        </template>
+
+        <template id="template-lorem-ipsum">
+            <div class="lorem">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed urna congue, gravida massa
+                    sed, rhoncus leo. Curabitur accumsan in ipsum et ullamcorper. Duis vel aliquam nisl, quis imperdiet
+                    felis. In quis facilisis urna, in fringilla turpis. Lorem ipsum dolor sit amet, consectetur
+                    adipiscing elit. Vivamus neque mi, posuere ac risus vel, facilisis convallis sapien. Pellentesque id
+                    pellentesque nisl, aliquam fermentum ipsum. Nam luctus ultrices elit. Orci varius natoque penatibus
+                    et magnis dis parturient montes, nascetur ridiculus mus. Sed ac auctor nisl, a rhoncus elit. Mauris
+                    ornare dui ac lacinia porta.</p>
+                <p>Nunc in velit nulla. Maecenas feugiat nunc nec vulputate feugiat. Integer consectetur turpis vel
+                    scelerisque cursus. Nullam quis magna id turpis bibendum cursus ac nec justo. Vestibulum bibendum
+                    eros nulla, ac auctor nulla blandit vitae. Integer euismod ex sit amet massa tempor, at ultrices
+                    arcu interdum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                    himenaeos. Suspendisse et lorem erat. Morbi et erat ornare, facilisis mi at, aliquam odio. Nunc
+                    vitae sem cursus, varius mauris vel, feugiat ligula. Aenean tempus maximus efficitur.</p>
+                <p>Curabitur neque nulla, ultricies in consectetur pellentesque, euismod ut sem. Aenean vel convallis
+                    magna, eget pellentesque eros. Maecenas lorem nibh, semper eu sapien ac, fermentum vulputate leo.
+                    Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque
+                    accumsan blandit tellus, non condimentum ex ullamcorper eget. Quisque metus tellus, convallis non
+                    neque et, auctor porta nulla. Mauris ut ullamcorper ipsum. Etiam eget arcu non tortor tincidunt
+                    aliquam eget et urna. Morbi efficitur volutpat efficitur. Proin pretium metus vel mi dapibus, semper
+                    hendrerit ipsum egestas. Donec porta sit amet odio vitae egestas. Praesent ac varius orci. Nunc
+                    efficitur mollis euismod. Morbi tristique lacus eu urna bibendum fermentum. Nulla tortor mi,
+                    suscipit in ultricies id, consectetur mattis enim. Sed scelerisque enim hendrerit consequat
+                    interdum.</p>
+                <p>Sed pretium purus mauris, rutrum fermentum ipsum condimentum a. Suspendisse placerat tellus at metus
+                    porta bibendum. Maecenas sed mauris lacinia, dignissim eros vel, laoreet ligula. Mauris enim velit,
+                    pulvinar et rutrum ac, suscipit in arcu. Vestibulum ante ipsum primis in faucibus orci luctus et
+                    ultrices posuere cubilia curae; Aliquam risus dolor, malesuada sit amet sagittis ac, tincidunt non
+                    diam. Nam et orci sollicitudin, ultrices tortor sed, aliquet mauris. Morbi pellentesque sed enim
+                    eget lacinia. Nulla facilisi. Morbi ornare tortor quis mollis vestibulum. Morbi aliquam quis diam et
+                    pellentesque. Donec cursus tristique leo, ut pretium augue elementum accumsan. Vestibulum et
+                    hendrerit nunc. Etiam ac neque ut urna eleifend tristique sed quis nulla.</p>
+                <p>Mauris et rutrum metus, quis tincidunt sem. Pellentesque habitant morbi tristique senectus et netus
+                    et malesuada fames ac turpis egestas. Vestibulum at ex at diam eleifend accumsan. Sed interdum neque
+                    nec nisi fermentum tempor a vitae risus. Proin malesuada cursus mollis. Vestibulum eu maximus risus.
+                    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque
+                    eleifend orci sed nisi semper, at dignissim lacus aliquam. Nulla consectetur porttitor eros non
+                    consequat.</p>
+            </div>
+        </template>
+    </div>
+</body>
+
+</html>
