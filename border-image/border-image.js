@@ -1,4 +1,5 @@
 import './border-image-dashed.js'
+import './border-image-dots.js'
 
 class BorderImageDemo extends HTMLElement {
     /** @type {ShadowRoot} */
@@ -32,7 +33,6 @@ class BorderImageDemo extends HTMLElement {
         }
 
         document.querySelector('main').addEventListener('scroll', () => {
-            this.computedStyleMap
             const {top, height} = this.getBoundingClientRect()
             const end = Math.abs(height - window.innerHeight)
             const progress = ((0 - top) / end).toFixed(4)

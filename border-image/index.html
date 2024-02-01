@@ -65,6 +65,12 @@
             inherits: true;
             initial-value: 800;
         }
+
+        @property --border-dots-speed {
+            syntax: "<number>";
+            inherits: true;
+            initial-value: 800;
+        }
     </style>
 </head>
 
@@ -114,7 +120,7 @@
             <style>
                 .wrapper {
                     display: grid;
-                    gap: 1rem;
+                    gap: 3rem;
                     justify-content: center;
                     text-align: center;
                     padding: 1rem;
@@ -131,6 +137,14 @@
                     --border-dash-color: oklch(0.82 0.31 141.68);
                     --border-dash-speed: 400;
                 }
+
+                border-image-dots {
+                    --border-color: oklch(0.65 0.2 240.02);
+                }
+
+                .border-image-dots-alt {
+                    --border-dots-speed: 4500;
+                }
             </style>
             <div class="wrapper">
                 <border-image-dashed>
@@ -143,6 +157,16 @@
                     <br />
                     --border-dash-speed: 400
                 </border-image-dashed>
+                <border-image-dots>
+                    Border Image Dots
+                    <br />
+                    --border-dots-speed: 800;
+                </border-image-dots>
+                <border-image-dots class="border-image-dots-alt">
+                    Border Image Dots
+                    <br />
+                    --border-dots-speed: 4500;
+                </border-image-dots>
             </div>
         </template>
 
@@ -152,6 +176,23 @@
                     border-width: 30px;
                     border-style: solid;
                     border-image: paint(border-image-dashed-paint);
+                    border-image-slice: 42 42 fill;
+                    border-image-width: 42px 42px;
+                    padding: 4rem;
+                    overflow: hidden;
+                }
+            </style>
+            <div class="container">
+                <slot></slot>
+            </div>
+        </template>
+
+        <template id="template-border-image-dots">
+            <style>
+                .container {
+                    border-width: 30px;
+                    border-style: solid;
+                    border-image: paint(border-image-dots-paint);
                     border-image-slice: 42 42 fill;
                     border-image-width: 42px 42px;
                     padding: 4rem;
