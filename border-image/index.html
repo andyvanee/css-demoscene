@@ -52,6 +52,12 @@
             inherits: true;
             initial-value: "transparent";
         }
+
+        @property --border-dash-speed {
+            syntax: "<number>";
+            inherits: true;
+            initial-value: 800;
+        }
     </style>
 </head>
 
@@ -60,19 +66,25 @@
         <border-image-demo>
             <div>
                 <h1>Border Image Demo</h1>
-                <p>This is a demo of a few examples of using the CSS Paint API in conjunction with scroll-driven
-                    animations.</p>
-                <p>The extra space and repeated demos are just to give the page enough length to really see the effect
+                <p>
+                    This is a demo of using the CSS Paint API in conjunction with scroll-driven animations.
+                </p>
+                <p>
+                    The extra space and repeated demos are just to give the page enough length to really see the effect
                 </p>
             </div>
         </border-image-demo>
     </main>
+
     <div id="html-template-contents" style="display: none">
         <template id="template-border-image-demo">
             <style>
                 .wrapper {
                     display: block;
                     padding: 3rem;
+                    max-width: 800px;
+                    margin: 0 auto;
+                    display: block;
                 }
             </style>
             <div class="wrapper">
@@ -89,26 +101,35 @@
                     text-align: center;
                     padding: 1rem;
                 }
+
+                border-image-dashed {
+                    --border-background-color: oklch(0.57 0.15 174.83);
+                    --border-dash-color: oklch(0.86 0.2 98.29);
+                    --border-dash-speed: 800;
+                }
+
+                .border-image-dashed-alt {
+                    --border-background-color: oklch(0.56 0.28 332.6);
+                    --border-dash-color: oklch(0.82 0.31 141.68);
+                    --border-dash-speed: 400;
+                }
             </style>
             <div class="wrapper">
                 <border-image-dashed>Border Image Dashed</border-image-dashed>
+                <border-image-dashed class="border-image-dashed-alt">Border Image Dashed</border-image-dashed>
             </div>
         </template>
 
         <template id="template-border-image-dashed">
             <style>
-                :host {
-                    --border-background-color: oklch(0.57 0.15 174.83);
-                    --border-dash-color: oklch(0.86 0.2 98.29);
-                }
-
                 .container {
-                    border-width: 20px;
+                    border-width: 30px;
                     border-style: solid;
-                    border-image: paint(border-image-dashed-paint) round;
-                    border-image-slice: 10 fill;
-                    border-image-width: 30px 48px;
+                    border-image: paint(border-image-dashed-paint);
+                    border-image-slice: 42 42 fill;
+                    border-image-width: 42px 42px;
                     padding: 4rem;
+                    overflow: hidden;
                 }
             </style>
             <div class="container">
