@@ -28,6 +28,16 @@
             overflow-y: scroll;
         }
 
+        h1 {
+            --base-color: oklch(0.53 0.27 260.07);
+            color: color-mix(in srgb, white, var(--base-color) 20%);
+            background-color: color-mix(in srgb, var(--base-color), transparent 80%);
+            border-bottom: 5px solid color-mix(in srgb, var(--base-color), transparent 60%);
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+
         .overflow-container {
             position: relative;
             z-index: 1;
@@ -49,6 +59,10 @@
             max-width: 100%;
             margin: 0 0 2rem;
         }
+
+        code {
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -67,11 +81,11 @@
                 </p>
 
                 <p>
-                    100 instances works well, but I did see the performance impacted enough to start getting dropped
-                    frames at this point. The compute time is a very small fraction of the frame budget, but there are
-                    4 sequential GPU calls of ~2ms which makes up roughly half of the ~16ms frame. My guess is that
-                    since I'm drawing to a significant portion of the frame with semi-transparent objects, this is a
-                    case where compositing becomes the bottleneck?
+                    100 instances works well, but I did see the performance impacted enough to start dropping frames at
+                    this point. The compute time is a very small fraction of the frame budget, but there are 4
+                    sequential GPU calls of ~2ms which makes up roughly half of the ~16ms frame. My guess is that since
+                    I'm drawing to a significant portion of the frame with semi-transparent objects, this is a case
+                    where compositing becomes the bottleneck?
                 </p>
                 <img src="./profile-dropped-frames.png" alt="Profiling dropped frames" />
                 <img src="./profile-frame.png" alt="Profiling dropped frames" />
