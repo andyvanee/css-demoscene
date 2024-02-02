@@ -10,6 +10,7 @@
         :root {
             font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
             font-size: 18px;
+            line-height: 1.4;
             background-color: oklch(0.78 0.18 216.91);
             color: white;
         }
@@ -29,8 +30,12 @@
         }
 
         a {
-            color: oklch(0.36 0.22 262.61);
+            color: oklch(0.5 0.14 236.9);
             text-decoration: none;
+        }
+
+        .marquee {
+            font-size: 1.2em;
         }
     </style>
 </head>
@@ -38,10 +43,11 @@
 <body>
     <main>
         <h1>CSS / JS Demoscene</h1>
-        <p>Demos of emerging CSS/JS technologies.</p>
+        <p class="marquee">Demos of emerging CSS/JS technologies.</p>
         <ul>
             <li><a href="/starfield/">Starfield</a></li>
             <li><a href="/border-image/">Border Image</a></li>
+            <li><a href="/rain/">Atmospheric Rain</a></li>
         </ul>
     </main>
 </body>
