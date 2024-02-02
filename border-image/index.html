@@ -11,6 +11,7 @@
         :root {
             font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
             font-size: 18px;
+            line-height: 1.4;
             background-color: black;
             color: white;
         }
@@ -36,6 +37,10 @@
             padding: 0.5rem;
             border-bottom: 5px solid oklch(0.64 0.18 233.5 / 0.4);
             margin-bottom: 2rem;
+        }
+
+        img {
+            max-width: 100%;
         }
 
         .lorem {
@@ -83,17 +88,38 @@
                     This is a demo of using the CSS Paint API in conjunction with scroll-driven animations.
                 </p>
                 <p>
+                    Unlike the Starfield demo, a scroll event listener is used to update a single CSS variable called
+                    <code>--progress</code>. The paint worklets for each border include this variable in
+                    <code>inputProperties</code>, which means that they re-render each time a scroll event is triggered.
+                </p>
+                <p>
+                    Since it may not be super obvious, the thing driving these animations are CSS Variables which can be
+                    seen in the inspector:
+                </p>
+                <img src="./css-variables.png" alt="CSS Variables in Inspector" />
+                <p>
                     The extra space and repetition below are just to give the page enough length to really see the
                     effect.
                 </p>
-                <h2>References</h2>
+                <h2>
+                    References
+                </h2>
                 <ul>
-                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Painting_API">CSS Painting API</a>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Painting_API">CSS Painting API</a>
                     </li>
-                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-image">border-image</a></li>
-                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@property">@property</a></li>
-                    <li><a href="https://houdini.how/">Houdini.how</a></li>
-                    <li><a href="https://web.dev/articles/constructable-stylesheets">Constructable Stylesheets</a></li>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-image">border-image</a>
+                    </li>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@property">@property</a>
+                    </li>
+                    <li>
+                        <a href="https://houdini.how/">Houdini.how</a>
+                    </li>
+                    <li>
+                        <a href="https://web.dev/articles/constructable-stylesheets">Constructable Stylesheets</a>
+                    </li>
                 </ul>
                 <hr style="margin: 3rem 0" />
             </div>
