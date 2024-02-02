@@ -25,10 +25,10 @@ class UIDroplet extends HTMLElement {
 
     connectedCallback() {
         const {width} = this.parentElement.getBoundingClientRect()
-        const randomX = Math.random() * width
+        const randomX = Math.random() * 100
         const randomizeSpeed = Math.floor(Math.random() * 1500 + 500)
         this.stylesheet.replace(
-            `:host { left: ${randomX}px; --start-offset: ${this.startOffset}; --droplet-speed: ${randomizeSpeed}; }`
+            `:host { left: ${randomX}vw; --start-offset: ${this.startOffset}; --droplet-speed: ${randomizeSpeed}; }`
         )
     }
 }
