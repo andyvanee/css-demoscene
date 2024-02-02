@@ -25,7 +25,7 @@ class StarfieldInner extends HTMLElement {
         /** @type {HTMLTemplateElement} */
         const lorem = document.querySelector('#template-lorem-ipsum')
 
-        for (const _ of new Array(2)) wrapper.append(lorem.content.cloneNode(true))
+        for (const _ of new Array(6)) wrapper.append(lorem.content.cloneNode(true))
     }
 
     configureScrollTimeline() {
