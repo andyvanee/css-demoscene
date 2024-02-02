@@ -37,8 +37,17 @@ class DropletPaint {
         const {width, height} = geom
         const doubleHeight = height * 2
 
-        ctx.fillStyle = 'rgba(200, 200, 200, 0.2)'
-        ctx.fillRect(0, ((time * speed + startOffset * doubleHeight) % doubleHeight) - height, width, height / 2)
+        const startY = ((time * speed + startOffset * doubleHeight) % doubleHeight) - height
+        const yHeight = height / 2
+        const endY = startY + yHeight
+
+        const gradient = ctx.createLinearGradient(0, startY, 0, endY)
+        gradient.addColorStop(0.0, 'rgba(255,255,255,0.0)')
+        gradient.addColorStop(0.5, 'rgba(255,255,255,0.01)')
+        gradient.addColorStop(1.0, 'rgba(255,255,255,0.2)')
+        ctx.fillStyle = gradient
+
+        ctx.fillRect(0, startY, width, yHeight)
     }
 }
 

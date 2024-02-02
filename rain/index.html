@@ -11,8 +11,8 @@
         :root {
             font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
             font-size: 18px;
-            background-color: #7b94ac;
-            color: #444;
+            background-image: linear-gradient(in oklab, #709dc8, #335a7e);
+            color: #111;
         }
 
         body {
@@ -39,6 +39,16 @@
             max-width: 800px;
             margin: 0 auto;
         }
+
+        hr {
+            margin: 2rem 0;
+            border-color: #111;
+        }
+
+        img {
+            max-width: 100%;
+            margin: 0 0 2rem;
+        }
     </style>
 </head>
 
@@ -49,6 +59,23 @@
                 <h1>
                     Atmospheric Rain Demo
                 </h1>
+                <p>
+                    This demo is a stress test of the paintWorklet when painting a larger number of instances.
+                    <code>&lt;ui-rain&gt;</code> creates 100 instances of <code>&lt;ui-droplet&gt;</code> which are
+                    driven by updating the <code>--time</code> CSS variable. Each instance is created with a unique
+                    <code>--start-offset</code> and <code>--droplet-speed</code> setting which does not change.
+                </p>
+
+                <p>
+                    100 instances works well, but I did see the performance impacted enough to start getting dropped
+                    frames at this point. The compute time is a very small fraction of the frame budget, but there are
+                    4 sequential GPU calls of ~2ms which makes up roughly half of the ~16ms frame. My guess is that
+                    since I'm drawing to a significant portion of the frame with semi-transparent objects, this is a
+                    case where compositing becomes the bottleneck?
+                </p>
+                <img src="./profile-dropped-frames.png" alt="Profiling dropped frames" />
+                <img src="./profile-frame.png" alt="Profiling dropped frames" />
+                <hr />
             </div>
         </div>
         <ui-rain></ui-rain>
@@ -77,7 +104,7 @@
                     position: absolute;
                     top: 0;
                     left: 0;
-                    width: 10px;
+                    width: 5px;
                     height: 100vh;
                     background-image: paint(droplet-paint);
                 }
@@ -85,6 +112,11 @@
         </template>
 
         <template id="template-lorem-ipsum">
+            <style>
+                .lorem p {
+                    opacity: 0.7;
+                }
+            </style>
             <div class="lorem">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed urna congue, gravida massa
                     sed, rhoncus leo. Curabitur accumsan in ipsum et ullamcorper. Duis vel aliquam nisl, quis imperdiet

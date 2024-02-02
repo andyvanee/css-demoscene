@@ -25,9 +25,12 @@ class UIRain extends HTMLElement {
     }
 
     connectedCallback() {
-        for (const _ of [...new Array(80)]) {
+        const dropletCount = 100
+
+        for (const _ of [...new Array(dropletCount)]) {
             this.append(document.createElement('ui-droplet'))
         }
+
         this.loop()
     }
 
@@ -40,12 +43,14 @@ class UIRain extends HTMLElement {
 
 customElements.define('ui-rain', UIRain)
 
-// Append lorem ipsum
-;(() => {
+const addLoremIpsum = () => {
     const container = document.querySelector('.overflow-container-inner')
+
     /** @type {HTMLTemplateElement} */
     const template = document.querySelector('#template-lorem-ipsum')
     for (const _ of [...new Array(10)]) {
         container.append(template.content.cloneNode(true))
     }
-})()
+}
+
+addLoremIpsum()
