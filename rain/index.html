@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain</title>
+    <link rel="icon" href="/favicon.svg">
+    <script type="module" src="./rain.js"></script>
+    <style>
+        :root {
+            font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            background-image: linear-gradient(in oklab, #709dc8, #335a7e);
+            color: #111;
+        }
+
+        body {
+            margin: 0;
+            overflow: auto;
+        }
+
+        main {
+            display: block;
+            position: relative;
+            height: 100vh;
+            box-sizing: border-box;
+            overflow-y: scroll;
+        }
+
+        .overflow-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .overflow-container-inner {
+            padding: 2rem;
+            min-height: 300vh;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        hr {
+            margin: 2rem 0;
+            border-color: #111;
+        }
+
+        img {
+            max-width: 100%;
+            margin: 0 0 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="overflow-container">
+            <div class="overflow-container-inner">
+                <h1>
+                    Atmospheric Rain Demo
+                </h1>
+                <p>
+                    This demo is a stress test of the paintWorklet when painting a larger number of instances.
+                    <code>&lt;ui-rain&gt;</code> creates 100 instances of <code>&lt;ui-droplet&gt;</code> which are
+                    driven by updating the <code>--time</code> CSS variable. Each instance is created with a unique
+                    <code>--start-offset</code> and <code>--droplet-speed</code> setting which does not change.
+                </p>
+
+                <p>
+                    100 instances works well, but I did see the performance impacted enough to start getting dropped
+                    frames at this point. The compute time is a very small fraction of the frame budget, but there are
+                    4 sequential GPU calls of ~2ms which makes up roughly half of the ~16ms frame. My guess is that
+                    since I'm drawing to a significant portion of the frame with semi-transparent objects, this is a
+                    case where compositing becomes the bottleneck?
+                </p>
+                <img src="./profile-dropped-frames.png" alt="Profiling dropped frames" />
+                <img src="./profile-frame.png" alt="Profiling dropped frames" />
+                <hr />
+            </div>
+        </div>
+        <ui-rain></ui-rain>
+    </main>
+
+    <div style="display: none">
+        <template id="ui-rain-template">
+            <style>
+                :host {
+                    display: block;
+                    position: fixed;
+                    z-index: 0;
+                    top: 0;
+                    left: 0;
+                    width: 100vw;
+                    height: 100vh;
+                }
+            </style>
+            <slot></slot>
+        </template>
+
+        <template id="ui-droplet-template">
+            <style>
+                :host {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 5px;
+                    height: 100vh;
+                    background-image: paint(droplet-paint);
+                }
+            </style>
+        </template>
+
+        <template id="template-lorem-ipsum">
+            <style>
+                .lorem p {
+                    opacity: 0.7;
+                }
+            </style>
+            <div class="lorem">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed urna congue, gravida massa
+                    sed, rhoncus leo. Curabitur accumsan in ipsum et ullamcorper. Duis vel aliquam nisl, quis imperdiet
+                    felis. In quis facilisis urna, in fringilla turpis. Lorem ipsum dolor sit amet, consectetur
+                    adipiscing elit. Vivamus neque mi, posuere ac risus vel, facilisis convallis sapien. Pellentesque id
+                    pellentesque nisl, aliquam fermentum ipsum. Nam luctus ultrices elit. Orci varius natoque penatibus
+                    et magnis dis parturient montes, nascetur ridiculus mus. Sed ac auctor nisl, a rhoncus elit. Mauris
+                    ornare dui ac lacinia porta.</p>
+                <p>Nunc in velit nulla. Maecenas feugiat nunc nec vulputate feugiat. Integer consectetur turpis vel
+                    scelerisque cursus. Nullam quis magna id turpis bibendum cursus ac nec justo. Vestibulum bibendum
+                    eros nulla, ac auctor nulla blandit vitae. Integer euismod ex sit amet massa tempor, at ultrices
+                    arcu interdum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                    himenaeos. Suspendisse et lorem erat. Morbi et erat ornare, facilisis mi at, aliquam odio. Nunc
+                    vitae sem cursus, varius mauris vel, feugiat ligula. Aenean tempus maximus efficitur.</p>
+                <p>Curabitur neque nulla, ultricies in consectetur pellentesque, euismod ut sem. Aenean vel convallis
+                    magna, eget pellentesque eros. Maecenas lorem nibh, semper eu sapien ac, fermentum vulputate leo.
+                    Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque
+                    accumsan blandit tellus, non condimentum ex ullamcorper eget. Quisque metus tellus, convallis non
+                    neque et, auctor porta nulla. Mauris ut ullamcorper ipsum. Etiam eget arcu non tortor tincidunt
+                    aliquam eget et urna. Morbi efficitur volutpat efficitur. Proin pretium metus vel mi dapibus, semper
+                    hendrerit ipsum egestas. Donec porta sit amet odio vitae egestas. Praesent ac varius orci. Nunc
+                    efficitur mollis euismod. Morbi tristique lacus eu urna bibendum fermentum. Nulla tortor mi,
+                    suscipit in ultricies id, consectetur mattis enim. Sed scelerisque enim hendrerit consequat
+                    interdum.</p>
+            </div>
+        </template>
+
+    </div>
+</body>
+
+</html>
